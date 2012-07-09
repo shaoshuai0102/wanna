@@ -1,0 +1,35 @@
+#!/usr/bin/env node
+
+var program = require('commander'),
+    pjson = require('../package.json'),
+    fs = require('fs'),
+    path = require('path');
+
+program
+    .version(pjson.version)
+    .usage('[options] <command ...>')
+    .on('--help', function() {
+        //console.log('  Available actions:');
+        //console.log('    write\twrite a new post');
+        //console.log('    view\tview a post');
+        //console.log('    publish\tpublish the site');
+    })
+    .option('-n, --name <name>', 'specify the post id');
+
+
+var dir_lib = path.dirname(process.env._) + '/../lib',
+    dir_commands = dir_lib + '/commands';
+
+var commands = fs.readdirSync(dir_commands);
+
+commands.forEach(function(filename) {
+    var CMD = require(dir_commands + '/' + filename);
+    //console.log(CMD);
+    program
+        .command(CMD.command)
+        .description(CMD.description)
+        .action(CMD.action);
+});
+//console.log(process.env);
+
+program.parse(process.argv);

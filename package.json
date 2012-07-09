@@ -8,15 +8,22 @@
     "contributors": ["Shawn <shaoshuai0102@gmail.com (http://shaoshuai.me)"],
     "engine": {"node": ">= 0.8.1"},
     "dependencies": {
+        "commander": "= 0.5.2",
+        "marked": "0.2.5",
+        "npm": ">= 1.1.35",
+        "shelljs": "0.0.5"
     },
     "repository": {
         "type": "git",
         "url": "https://github.com/shaoshuai0102/wanna.git"
     },
     "bugs": "https://github.com/shaoshuai0102/wanna/issues",
-    "main": "wanna.js",
+    "main": ".lib/wanna.js",
     "bin": {
         "wanna": "./bin/wanna"
+    },
+    "scripts": {
+        "start": "./lib/wanna.js"
     },
     "man" : [ "./man/foo.1", "./man/foo.2" ]
 }
