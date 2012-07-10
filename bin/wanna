@@ -17,7 +17,11 @@ program
     .option('-n, --name <name>', 'specify the post id');
 
 
-var dir_lib = path.dirname(process.env._) + '/../lib',
+//var stat = fs.lstatSync('/usr/local/bin/wanna');
+var dir = process.env._;
+var stat = fs.lstatSync(dir);
+var realpath = stat.isSymbolicLink() ? path.normalize(path.dirname(dir) + '/' + fs.readlinkSync(dir)) : dir;
+var dir_lib = path.normalize(path.dirname(realpath) + '/../lib'),
     dir_commands = dir_lib + '/commands';
 
 var commands = fs.readdirSync(dir_commands);
