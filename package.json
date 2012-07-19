@@ -11,7 +11,8 @@
         "commander": "= 0.5.2",
         "marked": "0.2.5",
         "npm": ">= 1.1.35",
-        "shelljs": "0.0.5"
+        "shelljs": "0.0.5",
+        "moment": "1.6.2"
     },
     "repository": {
         "type": "git",
