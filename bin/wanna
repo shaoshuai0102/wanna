@@ -14,7 +14,8 @@ program
         //console.log('    view\tview a post');
         //console.log('    publish\tpublish the site');
     })
-    .option('-n, --name <name>', 'specify the post id');
+    .option('-n, --name <name>', 'specify the post id')
+    .option('-p, --page', 'when used with write command, you means writing a page instead of a post')
 
 
 //var stat = fs.lstatSync('/usr/local/bin/wanna');
