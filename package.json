@@ -19,12 +19,12 @@
         "url": "https://github.com/shaoshuai0102/wanna.git"
     },
     "bugs": "https://github.com/shaoshuai0102/wanna/issues",
-    "main": ".lib/wanna.js",
+    "main": "./lib/wanna.js",
     "bin": {
         "wanna": "./bin/wanna"
     },
     "scripts": {
         "start": "./lib/wanna.js"
     },
-    "man" : [ "./man/foo.1", "./man/foo.2" ]
+    "man" : [ "./man/wanna" ]
 }

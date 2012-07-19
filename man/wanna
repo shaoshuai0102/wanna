@@ -1,0 +1,21 @@
+
+  Usage: wanna [options] <command ...>
+
+  Commands:
+
+    publish 
+    	publish my site
+    
+    view 
+    	view a post
+    
+    write [post]
+    	compose a new post
+
+  Options:
+
+    -h, --help         output usage information
+    -V, --version      output the version number
+    -n, --name <name>  specify the post id
+    -p, --page         when used with write command, you means writing a page instead of a post
+
