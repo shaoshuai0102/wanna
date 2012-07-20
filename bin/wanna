@@ -6,9 +6,9 @@ var program = require('commander'),
     path = require('path');
 
 program
+    //.description('Wanna is a blog-aware, static site generator in Node.js.')
     .version(pjson.version)
-    .usage('[options] <command ...>')
-    .option('-p, --page', 'when used with write command, you means writing a page instead of a post');
+    .usage('[options] <command>')
 
 
 var dir = process.env._;
@@ -21,12 +21,19 @@ var commands = fs.readdirSync(dir_commands);
 
 commands.forEach(function(filename) {
     var CMD = require(dir_commands + '/' + filename);
-    //console.log(CMD);
-    program
+    var handler = program
         .command(CMD.command)
         .description(CMD.description)
         .action(CMD.action);
+
+    CMD.options && CMD.options.forEach(function(v, i) {
+        handler.option.apply(handler, v);
+    });
 });
-//console.log(process.env);
+
 
 program.parse(process.argv);
+
+if (process.argv.length <=2 ) {
+    console.log('See "wanna -h" for help.');
+};

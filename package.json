@@ -26,5 +26,5 @@
     "scripts": {
         "start": "./lib/wanna.js"
     },
-    "man" : [ "./man/wanna.1" ]
+    "man" : [ "man/man1/wanna.1" ]
 }
