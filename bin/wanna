@@ -8,17 +8,9 @@ var program = require('commander'),
 program
     .version(pjson.version)
     .usage('[options] <command ...>')
-    .on('--help', function() {
-        //console.log('  Available actions:');
-        //console.log('    write\twrite a new post');
-        //console.log('    view\tview a post');
-        //console.log('    publish\tpublish the site');
-    })
-    .option('-n, --name <name>', 'specify the post id')
-    .option('-p, --page', 'when used with write command, you means writing a page instead of a post')
+    .option('-p, --page', 'when used with write command, you means writing a page instead of a post');
 
 
-//var stat = fs.lstatSync('/usr/local/bin/wanna');
 var dir = process.env._;
 var stat = fs.lstatSync(dir);
 var realpath = stat.isSymbolicLink() ? path.normalize(path.dirname(dir) + '/' + fs.readlinkSync(dir)) : dir;
