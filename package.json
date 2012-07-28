@@ -12,7 +12,8 @@
         "marked": "0.2.5",
         "npm": ">= 1.1.35",
         "shelljs": "0.0.5",
-        "moment": "1.6.2"
+        "moment": "1.6.2",
+        "tar": "0.1.13"
     },
     "repository": {
         "type": "git",
