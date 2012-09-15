@@ -20,7 +20,9 @@ var dir_lib = path.normalize(path.dirname(realpath) + '/../lib'),
 var commands = fs.readdirSync(dir_commands);
 
 commands.forEach(function(filename) {
-    var CMD = require(dir_commands + '/' + filename);
+    var path = dir_commands + '/' + filename;
+
+    var CMD = require(path);
     var handler = program
         .command(CMD.command)
         .description(CMD.description)

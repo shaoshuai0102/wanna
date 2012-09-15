@@ -13,6 +13,9 @@
         "npm": ">= 1.1.35",
         "shelljs": "0.0.5",
         "moment": "1.6.2",
+        "fstream": "0.1.18",
+        "fstream-ignore": "0.0.5",
+        "inherits": "1.0.0",
         "tar": "0.1.13"
     },
     "repository": {
