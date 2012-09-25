@@ -28,6 +28,8 @@ commands.forEach(function(filename) {
         .description(CMD.description)
         .action(CMD.action);
 
+    CMD.passHandler && CMD.passHandler(handler);
+
     CMD.options && CMD.options.forEach(function(v, i) {
         handler.option.apply(handler, v);
     });
