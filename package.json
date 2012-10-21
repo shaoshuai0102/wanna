@@ -18,7 +18,8 @@
         "inherits": "1.0.0",
         "tar": "0.1.13",
         "request": "2.11.4",
-        "json5": "0.1.0"
+        "json5": "0.1.0",
+        "consolidate": "0.4.0"
     },
     "repository": {
         "type": "git",
