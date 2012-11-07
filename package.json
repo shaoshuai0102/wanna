@@ -2,7 +2,7 @@
     "name": "wanna",
     "version": "0.1.1",
     "description": "Wanna is a blog-aware, static site generator in Node.js.",
-    "homepage": "https://github.com/shaoshuai0102/wanna",
+    "homepage": "http://wannajs.org",
     "keywords": ["node", "wanna", "blog", "cms"],
     "author": "Shawn <shaoshuai0102@gmail.com> (http://shaoshuai.me)",
     "contributors": ["Shawn <shaoshuai0102@gmail.com (http://shaoshuai.me)"],
