@@ -3,12 +3,29 @@
 var program = require('commander'),
     pjson = require('../package.json'),
     fs = require('fs'),
-    path = require('path');
+    path = require('path'),
+    clc = require('cli-color');
 
 program
-    //.description('Wanna is a blog-aware, static site generator in Node.js.')
+    .description('Wanna is a blog-aware, static site generator in Node.js.')
     .version(pjson.version)
-    .usage('[options] <command>')
+    .usage('<command> [options]')
+
+
+program.helpInformation = function() {
+  return [
+    '',
+    '  ' + clc.green('♨') + '  ' + clc.bold(this._description),
+    '',
+    clc.cyan('  Usage: ') + this._name + ' ' + this.usage(),
+    '' + this.commandHelp().replace(/Commands:/, clc.cyan('Commands:')),
+    clc.cyan('  Options:'),
+    '',
+    '' + this.optionHelp().replace(/^/gm, '    '),
+    '',
+    ''
+  ].join('\n');
+};
 
 
 var dir = process.env._;

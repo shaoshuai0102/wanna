@@ -8,7 +8,7 @@
     "contributors": ["Shawn <shaoshuai0102@gmail.com (http://shaoshuai.me)"],
     "engine": {"node": ">= 0.8.1"},
     "dependencies": {
-        "commander": "= 0.5.2",
+        "commander": "1.1.1",
         "marked": "0.2.5",
         "npm": ">= 1.1.35",
         "shelljs": "0.0.5",
@@ -19,7 +19,8 @@
         "tar": "0.1.13",
         "request": "2.11.4",
         "json5": "0.1.0",
-        "consolidate": "0.4.0"
+        "consolidate": "0.4.0",
+        "cli-color": "0.2.1"
     },
     "repository": {
         "type": "git",
