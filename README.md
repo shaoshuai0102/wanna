@@ -7,10 +7,17 @@ Visit http://wannajs.org to see more details.
 
 ## Installation
 
-    git clone https://github.com/shaoshuai0102/wanna.git
+### Install the lastest stable version
+
     npm install wanna -g
 
-## Usage
+### Install the latest development version
+
+    git clone git@github.com:shaoshuai0102/wanna.git
+    cd wanna
+    npm install . -g
+
+## Basic Usage
 
 *   wanna write
 
@@ -26,4 +33,4 @@ Visit http://wannajs.org to see more details.
 
 *   wanna help
 
-    See help documentation.
+    See the full help documentation.
