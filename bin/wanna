@@ -1,17 +1,19 @@
 #!/usr/bin/env node
 
 var program = require('commander'),
-    pjson = require('../package.json'),
+    package = require('../package.json'),
     fs = require('fs'),
     path = require('path'),
-    clc = require('cli-color');
+    clc = require('cli-color'),
+    logger = require('../lib/utils/logger');
 
 program
     .description('Wanna is a blog-aware, static site generator in Node.js.')
-    .version(pjson.version)
+    .version(package.version)
     .usage('<command> [options]')
 
 
+// make console information more friendly
 program.helpInformation = function() {
   return [
     '',
@@ -28,22 +30,13 @@ program.helpInformation = function() {
 };
 
 
-var dir = process.env._;
-var stat = fs.lstatSync(dir);
-var realpath = stat.isSymbolicLink() ? path.normalize(path.dirname(dir) + '/' + fs.readlinkSync(dir)) : dir;
-var dir_lib = path.normalize(path.dirname(realpath) + '/../lib'),
-    dir_commands = dir_lib + '/commands';
-
-var commands = fs.readdirSync(dir_commands);
-
-commands.forEach(function(filename) {
-    var path = dir_commands + '/' + filename;
-
-    var CMD = require(path);
+// register all commands
+var commands = getCommands();
+commands.forEach(function(CMD) {
     var handler = program
-        .command(CMD.command)
-        .description(CMD.description)
-        .action(CMD.action);
+                    .command(CMD.command)
+                    .description(CMD.description)
+                    .action(CMD.action);
 
     CMD.passHandler && CMD.passHandler(handler);
 
@@ -56,5 +49,24 @@ commands.forEach(function(filename) {
 program.parse(process.argv);
 
 if (process.argv.length <=2 ) {
-    console.log('See "wanna -h" for help.');
+    logger.info('See "wanna -h" for help.');
 };
+
+// load all commands from 'lib/commands' directroy
+function getCommands() {
+    var dir = process.env._;
+    var stat = fs.lstatSync(dir);
+    var realpath = stat.isSymbolicLink() ? path.normalize(path.dirname(dir) + '/' + fs.readlinkSync(dir)) : dir;
+    var dir_lib = path.normalize(path.dirname(realpath) + '/../lib'),
+        dir_commands = dir_lib + '/commands';
+
+    var filenames = fs.readdirSync(dir_commands);
+    var commands = filenames
+                    .filter(function(filename) {
+                        return /.*\.js$/.test(filename);
+                    })
+                    .map(function(filename) {
+                        return require(dir_commands + '/' + filename);
+                    });
+    return commands;
+}

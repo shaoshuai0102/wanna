@@ -5,6 +5,8 @@ Wanna is a blog-aware, static site generator in Node.js.
 
 Visit http://wannajs.org to see more details.
 
+I'm working on refactoring this project now. So be patient, you'll get a more elegent wanna. :p
+
 ## Installation
 
 ### Install the lastest stable version
@@ -23,7 +25,7 @@ Visit http://wannajs.org to see more details.
 
     Compose a new post or page.
 
-*   wanna view
+*   wanna build
 
     Generate the whole site.
 
