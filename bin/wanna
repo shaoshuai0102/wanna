@@ -4,8 +4,10 @@ var program = require('commander'),
     package = require('../package.json'),
     fs = require('fs'),
     path = require('path'),
-    clc = require('cli-color'),
-    logger = require('../lib/utils/logger');
+    colorful = require('colorful');
+
+var color = colorful.color,
+    logging = colorful.logging;
 
 program
     .description('Wanna is a blog-aware, static site generator in Node.js.')
@@ -17,11 +19,11 @@ program
 program.helpInformation = function() {
   return [
     '',
-    '  ' + clc.green('♨') + '  ' + clc.bold(this._description),
+    '  ' + color.green('♨') + '  ' + color.bold(this._description),
     '',
-    clc.cyan('  Usage: ') + this._name + ' ' + this.usage(),
-    '' + this.commandHelp().replace(/Commands:/, clc.cyan('Commands:')),
-    clc.cyan('  Options:'),
+    color.cyan('  Usage: ') + this._name + ' ' + this.usage(),
+    '' + this.commandHelp().replace(/Commands:/, color.cyan('Commands:')),
+    color.cyan('  Options:'),
     '',
     '' + this.optionHelp().replace(/^/gm, '    '),
     '',
@@ -32,15 +34,15 @@ program.helpInformation = function() {
 
 // register all commands
 var commands = getCommands();
-commands.forEach(function(CMD) {
+commands.forEach(function(cmdInfo) {
     var handler = program
-                    .command(CMD.command)
-                    .description(CMD.description)
-                    .action(CMD.action);
+                    .command(cmdInfo.command)
+                    .description(cmdInfo.description)
+                    .action(cmdInfo.action);
 
-    CMD.passHandler && CMD.passHandler(handler);
+    cmdInfo.passHandler && cmdInfo.passHandler(handler);
 
-    CMD.options && CMD.options.forEach(function(v, i) {
+    cmdInfo.options && cmdInfo.options.forEach(function(v, i) {
         handler.option.apply(handler, v);
     });
 });
@@ -49,7 +51,7 @@ commands.forEach(function(CMD) {
 program.parse(process.argv);
 
 if (process.argv.length <=2 ) {
-    logger.info('See "wanna -h" for help.');
+    logging.info('See "wanna -h" for help.');
 };
 
 // load all commands from 'lib/commands' directroy
