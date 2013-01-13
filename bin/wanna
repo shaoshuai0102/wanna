@@ -16,21 +16,20 @@ program
     //.option('-v, --verbose', 'Turn on verbose output. Mostly useful for debugging.')
     
 
-
 // make console information more friendly
 program.helpInformation = function() {
-  return [
-    '',
-    '  ' + color.green('♨') + '  ' + color.bold(this._description),
-    '',
-    color.cyan('  Usage: ') + this._name + ' ' + this.usage(),
-    '' + this.commandHelp().replace(/Commands:/, color.cyan('Commands:')),
-    color.cyan('  Options:'),
-    '',
-    '' + this.optionHelp().replace(/^/gm, '    '),
-    '',
-    ''
-  ].join('\n');
+    return [
+        '',
+        '  ' + color.green('♨') + '  ' + color.bold(this._description),
+        '',
+        color.cyan('  Usage: ') + this._name + ' ' + this.usage(),
+        '' + this.commandHelp().replace(/Commands:/, color.cyan('Commands:')),
+        color.cyan('  Options:'),
+        '',
+        '' + this.optionHelp().replace(/^/gm, '    '),
+        '',
+        ''
+    ].join('\n');
 };
 
 
