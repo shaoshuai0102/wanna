@@ -44,5 +44,32 @@ describe('id-parser', function(){
             expect(result.version).to.equal('latest');
             expect(result.id).to.equal('mustache@latest');
         });
+
+        it('shold parse invalid input to null', function() {
+            var raw = {};
+            var result = idParser.parse(raw);
+            expect(result).to.equal(null);
+
+            var raw = {version: '1.1.1'};
+            var result = idParser.parse(raw);
+            expect(result).to.equal(null);
+
+            var raw = null;
+            var result = idParser.parse(raw);
+            expect(result).to.equal(null);
+
+            var raw = undefined;
+            var result = idParser.parse(raw);
+            expect(result).to.equal(null);
+
+            var raw = '';
+            var result = idParser.parse(raw);
+            expect(result).to.equal(null);
+
+            var raw = '@';
+            var result = idParser.parse(raw);
+            expect(result).to.equal(null);
+
+        });
     });
 });
