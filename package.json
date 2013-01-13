@@ -20,7 +20,8 @@
         "request": "2.11.4",
         "json5": "0.1.0",
         "consolidate": "0.4.0",
-        "colorful": "1.2.0"
+        "colorful": "1.2.0",
+        "underscore": "1.4.3"
     },
     "repository": {
         "type": "git",
