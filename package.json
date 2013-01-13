@@ -27,9 +27,6 @@
         "mocha": "1.8.1",
         "chai": "1.4.2"
     },
-    "scripts": {
-        "test": "node_modules/.bin/mocha tests/*-spec.js"
-    },
     "repository": {
         "type": "git",
         "url": "https://github.com/shaoshuai0102/wanna.git"
@@ -40,7 +37,7 @@
         "wanna": "./bin/wanna"
     },
     "scripts": {
-        "start": "./lib/wanna.js"
+        "test": "node_modules/.bin/mocha tests/*-spec.js"
     },
     "man" : [ "man/man1/wanna.1" ]
 }
