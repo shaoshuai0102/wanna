@@ -12,7 +12,9 @@ var color = colorful.color,
 program
     .description('Wanna is a blog-aware, static site generator in Node.js.')
     .version(package.version)
-    .usage('<command> [options]')
+    .usage('<command> [options]');
+    //.option('-v, --verbose', 'Turn on verbose output. Mostly useful for debugging.')
+    
 
 
 // make console information more friendly
@@ -40,8 +42,6 @@ commands.forEach(function(cmdInfo) {
                     .description(cmdInfo.description)
                     .action(cmdInfo.action);
 
-    cmdInfo.passHandler && cmdInfo.passHandler(handler);
-
     cmdInfo.options && cmdInfo.options.forEach(function(v, i) {
         handler.option.apply(handler, v);
     });
@@ -52,7 +52,13 @@ program.parse(process.argv);
 
 if (process.argv.length <=2 ) {
     logging.info('See "wanna -h" for help.');
+    process.exit(0);
 };
+
+if (program.verbose) {
+    logging.info('Verbose Mode');
+    logging.config({verbose: true});
+}
 
 // load all commands from 'lib/commands' directroy
 function getCommands() {
