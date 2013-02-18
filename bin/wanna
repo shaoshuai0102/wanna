@@ -1,79 +1,80 @@
 #!/usr/bin/env node
 
-var program = require('commander'),
-    package = require('../package.json'),
-    fs = require('fs'),
-    path = require('path'),
-    colorful = require('colorful');
+"use strict";
+
+var program = require('commander');
+var packageInfo = require('../package.json');
+var fs = require('fs');
+var path = require('path');
+var colorful = require('colorful');
 
 var color = colorful.color,
     logging = colorful.logging;
 
 program
     .description('Wanna is a blog-aware, static site generator in Node.js.')
-    .version(package.version)
+    .version(packageInfo.version)
     .usage('<command> [options]');
-    //.option('-v, --verbose', 'Turn on verbose output. Mostly useful for debugging.')
-    
+//.option('-v, --verbose', 'Turn on verbose output. Mostly useful for debugging.')
 
 // make console information more friendly
-program.helpInformation = function() {
-    return [
-        '',
-        '  ' + color.green('♨') + '  ' + color.bold(this._description),
-        '',
-        color.cyan('  Usage: ') + this._name + ' ' + this.usage(),
-        '' + this.commandHelp().replace(/Commands:/, color.cyan('Commands:')),
-        color.cyan('  Options:'),
-        '',
-        '' + this.optionHelp().replace(/^/gm, '    '),
-        '',
-        ''
-    ].join('\n');
+program.helpInformation = function () {
+  return [
+    '',
+    '  ' + color.green('♨') + '  ' + color.bold(this._description),
+    '',
+    color.cyan('  Usage: ') + this._name + ' ' + this.usage(),
+    '' + this.commandHelp().replace(/Commands:/, color.cyan('Commands:')),
+    color.cyan('  Options:'),
+    '',
+    '' + this.optionHelp().replace(/^/gm, '    '),
+    '',
+    ''
+  ].join('\n');
 };
-
 
 // register all commands
 var commands = getCommands();
-commands.forEach(function(cmdInfo) {
-    var handler = program
-                    .command(cmdInfo.command)
-                    .description(cmdInfo.description)
-                    .action(cmdInfo.action);
+commands.forEach(function (cmdInfo) {
+  var handler = program
+      .command(cmdInfo.command)
+      .description(cmdInfo.description)
+      .action(cmdInfo.action);
 
-    cmdInfo.options && cmdInfo.options.forEach(function(v, i) {
-        handler.option.apply(handler, v);
+  if (cmdInfo.options) {
+    cmdInfo.options.forEach(function (v, i) {
+      handler.option.apply(handler, v);
     });
+  }
 });
-
 
 program.parse(process.argv);
 
-if (process.argv.length <=2 ) {
-    logging.info('See "wanna -h" for help.');
-    process.exit(0);
-};
+if (process.argv.length <= 2) {
+  logging.info('See "wanna -h" for help.');
+  process.exit(0);
+}
 
 if (program.verbose) {
-    logging.info('Verbose Mode');
-    logging.config({verbose: true});
+  logging.info('Verbose Mode');
+  logging.config({verbose: true});
 }
 
 // load all commands from 'lib/commands' directroy
 function getCommands() {
-    var dir = process.env._;
-    var stat = fs.lstatSync(dir);
-    var realpath = stat.isSymbolicLink() ? path.normalize(path.dirname(dir) + '/' + fs.readlinkSync(dir)) : dir;
-    var dir_lib = path.normalize(path.dirname(realpath) + '/../lib'),
-        dir_commands = dir_lib + '/commands';
+  var dir = process.env._;
+  var stat = fs.lstatSync(dir);
+  var realpath = stat.isSymbolicLink() ? path.normalize(path.dirname(dir) +
+      '/' + fs.readlinkSync(dir)) : dir;
+  var dir_lib = path.normalize(path.dirname(realpath) + '/../lib');
+  var dir_commands = dir_lib + '/commands';
 
-    var filenames = fs.readdirSync(dir_commands);
-    var commands = filenames
-                    .filter(function(filename) {
-                        return /.*\.js$/.test(filename);
-                    })
-                    .map(function(filename) {
-                        return require(dir_commands + '/' + filename);
-                    });
-    return commands;
+  var filenames = fs.readdirSync(dir_commands);
+  return filenames
+      .filter(function (filename) {
+        return (/.*\.js$/).test(filename);
+      })
+      .map(function (filename) {
+        return require(dir_commands + '/' + filename);
+      });
 }
